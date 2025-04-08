@@ -1,7 +1,24 @@
 # aaayafuj-instagram-hacking
 This tools can hack any password without permission.
-Complete Installation Steps:
-Clone the Repository: First, clone the repository from GitHub.
+*Complete Installation Steps:
+*Clone the Repository: First, clone the repository from GitHub.
+=> But I remind you this tools use for ethically!
+=> For educational purpose and cybersecurity! 
+=> This tool use for legal and ethical purpose!
+
+                                     __        _      _           _              
+       __ _  __ _  __ _ _   _  __ _ / _|_   _ (_)    (_)_ __  ___| |_ __ _  __ _ 
+     / _` |/ _` |/ _` | | | |/ _` | |_| | | || |_____| | '_ \/ __| __/ _` |/ _` |
+    | (_| | (_| | (_| | |_| | (_| |  _| |_| || |_____| | | | \__ \ || (_| | (_| |
+     \__,_|\__,_|\__,_|\__, |\__,_|_|  \__,_|/ |     |_|_| |_|___/\__\__,_|\__, |
+                       |___/               |__/                            |___/ 
+                               _                _    _             
+     _ __ __ _ _ __ ___       | |__   __ _  ___| | _(_)_ __   __ _ 
+    | '__/ _` | '_ ` _ \ _____| '_ \ / _` |/ __| |/ / | '_ \ / _` |
+    | | | (_| | | | | | |_____| | | | (_| | (__|   <| | | | | (_| |
+    |_|  \__,_|_| |_| |_|     |_| |_|\__,_|\___|_|\_\_|_| |_|\__, |
+                                                             |___/ 
+
 
 # Open your terminal and run:
     git clone https://github.com/YafetTesfahuney/aaayafuj-instagram-hacking.git
@@ -15,7 +32,7 @@ Clone the Repository: First, clone the repository from GitHub.
     chmod +x aaayafuj-instagram-hacking.sh
 * Run the Script: Now you can run the script to install the necessary components.
 * If you're running it on a system that supports Bash (like Linux or macOS), execute it like this:
-
+![R](https://github.com/user-attachments/assets/79b144e6-b580-4e0a-bd48-0f7fc692438d)
 # Run the script 
     ./aaayafuj-instagram-hacking.sh
 * For Windows, follow the specific instructions in the script, but it will require running certain commands in a terminal
@@ -52,3 +69,19 @@ Execution of Tools: After everything is installed, the script will make certain 
        sudo dpkg -i windscribe-cli.deb
        windscribe login
        pip3 install -r requirements.txt --break-system-packages
+   ![bb-bh-whitehat-hacker](https://github.com/user-attachments/assets/b2388d4f-9ac8-45ba-87f9-1c4cc781b7f5)
+   # Style on terminal or different.
+                                         ____        _ 
+          ____ _____ _____ ___  ______ _/ __/_  __  (_)
+        / __ `/ __ `/ __ `/ / / / __ `/ /_/ / / / / / 
+       / /_/ / /_/ / /_/ / /_/ / /_/ / __/ /_/ / / /  
+       \__,_/\__,_/\__,_/\__, /\__,_/_/  \__,_/_/ /   
+                 /____/               /___/    
+        ___         _                              _  _         _   _           
+       |_ _|_ _  __| |_ __ _ __ _ _ _ __ _ _ __   | || |__ _ __| |_(_)_ _  __ _ 
+        | || ' \(_-<  _/ _` / _` | '_/ _` | '  \  | __ / _` / _| / / | ' \/ _` |
+       |___|_||_/__/\__\__,_\__, |_| \__,_|_|_|_| |_||_\__,_\__|_\_\_|_||_\__, |
+                            |___/                                         |___/ 
+
+
+
