@@ -1,0 +1,136 @@
+#!/bin/bash
+
+# aaayafuj All-in-One Installer
+# Insta-ready, multi-distro, soul-invoked, VPN-secured.
+# ️To be used for ethical hacking purpose.
+# ️To be used for unethical hacking purpose.
+
+TOOL_NAME="aaayafuj-instagram-hacking"
+REPO_URL="https://github.com/YafetTesfahuney/aaayafuj-instagram-hacking.git"
+INSTALL_DIR="$HOME/$TOOL_NAME"
+LOG_FILE="$HOME/.aaayafuj/install.log"
+
+set -e
+
+function header() {
+    echo -e "\033[1;35m"
+    echo "──────────────────────────────────────────────"
+    echo "🔧 Installing $TOOL_NAME"
+    echo "──────────────────────────────────────────────"
+    echo -e "\033[0m"
+}
+
+function detect_os() {
+    echo "[*] Detecting system..."
+
+    if [[ -f /etc/os-release ]]; then
+        source /etc/os-release
+        OS=$ID
+    elif [[ "$(uname -o)" == "Android" ]]; then
+        OS="termux"
+    else
+        echo "[-] Unsupported system."
+        exit 1
+    fi
+
+    echo "[+] Detected OS: $OS"
+}
+
+function install_deps() {
+    echo "[*] Installing dependencies..."
+
+    case "$OS" in
+        ubuntu|debian|kali)
+            sudo apt update
+            sudo apt install -y git python3 python3-pip curl wget unzip
+            ;;
+        void)
+            sudo xbps-install -Sy git python3 python3-pip curl wget unzip
+            ;;
+        arch|blackarch)
+            sudo pacman -Syu --noconfirm git python-pip curl wget unzip
+            ;;
+        termux)
+            pkg update
+            pkg install -y git python wget curl
+            ;;
+        *)
+            echo "[-] Unsupported system for auto-install."
+            exit 1
+            ;;
+    esac
+}
+
+function clone_repo() {
+    echo "[*] Cloning repository..."
+    git clone "$REPO_URL" "$INSTALL_DIR"
+    cd "$INSTALL_DIR"
+}
+
+function install_vpn() {
+    echo "[*] Installing VPN (Windscribe)..."
+
+    case "$OS" in
+        ubuntu|debian|kali)
+            cd dependencies
+            sudo dpkg -i windscribe-cli.deb || true
+            ;;
+        arch|blackarch)
+            yay -S windscribe-cli --noconfirm || echo "⚠️ Please install Windscribe manually."
+            ;;
+        void)
+            cd dependencies
+            sudo dpkg -i windscribe-cli || true
+            xbps-rindex -a windscribe-cli.xbps
+            ;;
+        termux)
+            echo "[~] VPN not available for Termux. Skipping..."
+            ;;
+    esac
+}
+
+function login_vpn() {
+    if [[ "$OS" != "termux" ]]; then
+        echo "[*] Logging into VPN..."
+        windscribe login
+    fi
+}
+
+function install_python_reqs() {
+    echo "[*] Installing Python requirements..."
+    cd cmd
+    pip3 install -r requirements.txt
+    cd ..
+}
+
+function soul_init() {
+    echo "[*] Loading soul script..."
+    chmod +x soul.sh
+    ./soul.sh || exit 1
+}
+
+function finalize() {
+    echo "[*] Setting execution permissions..."
+    chmod +x linux.sh
+
+    echo "[+] Installation complete!"
+    echo "[✓] Run the tool: cd $INSTALL_DIR && ./linux.sh"
+}
+
+function log() {
+    echo "$(date) | $1" >> "$LOG_FILE"
+}
+
+# ========== RUN ==========
+header
+detect_os
+install_deps
+clone_repo
+install_vpn
+login_vpn
+install_python_reqs
+soul_init
+finalize
+
+log "$TOOL_NAME installed successfully on $OS"
+
