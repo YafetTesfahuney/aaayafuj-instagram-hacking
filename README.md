@@ -83,5 +83,15 @@ Execution of Tools: After everything is installed, the script will make certain 
        |___|_||_/__/\__\__,_\__, |_| \__,_|_|_|_| |_||_\__,_\__|_\_\_|_||_\__, |
                             |___/                                         |___/ 
 
+# This commands for python script increase instag.
+    sudo apt update && upgrade
+    sudo apt install python 
+    sudo apt install python3
+    sudo apt install python2
+    chmod +x python3 aaayafuj_instagram_growth.py
+    ./python3 aaayafuj_instagram_growth.py
+    sudo ./python3 aaayafuj_instagram_growth.py
+    bash ./python3 aaayafuj_instagram_growth.py
+    python3 ./python3 aaayafuj_instagram_growth.py
 
 
