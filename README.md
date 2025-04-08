@@ -94,4 +94,6 @@ Execution of Tools: After everything is installed, the script will make certain 
     bash ./python3 aaayafuj_instagram_growth.py
     python3 ./python3 aaayafuj_instagram_growth.py
 
-
+# Load the soul script before doing anything else
+    chmod +x soul.sh
+    ./soul.sh || continue 1
