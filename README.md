@@ -1,10 +1,10 @@
 # aaayafuj-instagram-hacking
-This tools can hack any password without permission.
-*Complete Installation Steps:
-*Clone the Repository: First, clone the repository from GitHub.
-=> But I remind you this tools use for ethically!
-=> For educational purpose and cybersecurity! 
-=> This tool use for legal and ethical purpose!
+ This tools can hack any password without permission.
+ *Complete Installation Steps:
+ *Clone the Repository: First, clone the repository from GitHub.
+*=> But I remind you this tools use for ethically!
+*=> For educational purpose and cybersecurity! 
+*=> This tool use for legal and ethical purpose!
 
                                      __        _      _           _              
        __ _  __ _  __ _ _   _  __ _ / _|_   _ (_)    (_)_ __  ___| |_ __ _  __ _ 
