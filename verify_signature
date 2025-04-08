@@ -1,0 +1,106 @@
+#!/bin/bash
+
+# aaayafuj-instagram-hacking.sh with Digital Signature Verification
+
+# Function to verify the script's signature
+verify_signature() {
+    echo "Verifying script integrity..."
+
+    # Path to the signature and public key
+    SIGNATURE_FILE="aaayafuj-instagram-hacking.sh.sig"
+    PUBLIC_KEY="public_key.pem"
+
+    # Verify the signature using OpenSSL
+    openssl dgst -sha256 -verify "$PUBLIC_KEY" -signature "$SIGNATURE_FILE" aaayafuj-instagram-hacking.sh
+
+    # Check if verification was successful
+    if [ $? -ne 0 ]; then
+        echo "ERROR: Script integrity verification failed. The script may have been tampered with."
+        exit 1
+    else
+        echo "Script integrity verified. Proceeding with execution."
+    fi
+}
+
+# Function to check if Windscribe is installed
+check_windscribe_installed() {
+    if ! command -v windscribe &> /dev/null; then
+        echo "Windscribe VPN is not installed. Installing..."
+        install_windscribe
+    else
+        echo "Windscribe VPN is already installed."
+    fi
+}
+
+# Function to install Windscribe VPN
+install_windscribe() {
+    echo "Installing Windscribe VPN..."
+    
+    if [[ "$(uname -s)" == "Linux" ]]; then
+        if [ -f /etc/os-release ]; then
+            . /etc/os-release
+            if [[ "$ID" == "ubuntu" ]] || [[ "$ID" == "debian" ]]; then
+                sudo apt update
+                sudo apt install -y gdebi
+                wget https://download.windscribe.com/desktop/deb/windscribe-cli.deb
+                sudo gdebi windscribe-cli.deb -n
+                rm windscribe-cli.deb
+            fi
+        fi
+    fi
+}
+
+# Function to login to Windscribe VPN
+login_to_vpn() {
+    echo "Logging into Windscribe VPN..."
+    
+    if [[ -z "$WINDSCRIBE_USERNAME" ]] || [[ -z "$WINDSCRIBE_PASSWORD" ]]; then
+        echo "No VPN credentials provided. Exiting."
+        exit 1
+    fi
+    
+    windscribe login "$WINDSCRIBE_USERNAME" "$WINDSCRIBE_PASSWORD"
+    
+    echo "Connecting to Windscribe VPN..."
+    windscribe connect USA
+    if [ $? -ne 0 ]; then
+        echo "VPN connection failed. Exiting."
+        exit 1
+    else
+        echo "VPN is connected successfully."
+    fi
+}
+
+# Function to check if the VPN is connected
+check_vpn_connection() {
+    if ! windscribe status | grep -q "Connected"; then
+        echo "VPN is not connected. Trying to connect..."
+        login_to_vpn
+    else
+        echo "VPN is already connected."
+    fi
+}
+
+# Function to run Instagram hacking tool
+run_instagram_tool() {
+    echo "Running Instagram hacking tool..."
+    echo "Instagram hacking tool is running securely with VPN protection!"
+}
+
+# Main function to execute everything
+main_execution() {
+    # Verify the integrity of the script before proceeding
+    verify_signature
+    
+    # Check if VPN is installed and log in
+    check_windscribe_installed
+    
+    # Check VPN connection status
+    check_vpn_connection
+    
+    # Run Instagram tool only after VPN connection
+    run_instagram_tool
+}
+
+# Run the main function
+main_execution
