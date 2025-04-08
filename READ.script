@@ -1,0 +1,135 @@
+#!/bin/bash
+
+# aaayafuj-instagram-hacking.sh - Combined script for multiple OS installation
+
+echo "Welcome to the aaayafuj Instagram hacking tool installer."
+echo "Please choose your operating system from the list below:"
+echo "1. Ubuntu"
+echo "2. Debian"
+echo "3. Black Arch"
+echo "4. Void"
+echo "5. Kali Linux"
+echo "6. Termux"
+echo "7. Windows"
+
+# User chooses the OS
+read -p "Enter the number corresponding to your OS: " os_choice
+
+# Function for Ubuntu/Debian setup
+install_ubuntu_debian() {
+    echo "Installing for Ubuntu/Debian..."
+    git clone https://github.com/rdWei/SocialMediaHackingToolkit
+    cd SocialMediaHackingToolkit
+    cd dependencies
+    sudo dpkg -i windscribe-cli.deb
+    windscribe login
+    cd ../cmd
+    pip3 install -r requirements.txt
+    cd ..
+    chmod +x linux.sh
+    ./linux.sh
+    echo "Ubuntu/Debian installation complete!"
+}
+
+# Function for Arch Linux setup
+install_arch() {
+    echo "Installing for Arch Linux..."
+    git clone https://github.com/rdWei/SocialMediaHackingToolkit
+    cd SocialMediaHackingToolkit
+    yay -S windscribe-cli
+    systemctl start windscribe-cli
+    windscribe login
+    cd ../cmd
+    pip3 install -r requirements.txt
+    cd ..
+    chmod +x linux.sh
+    ./linux.sh
+    echo "Arch Linux installation complete!"
+}
+
+# Function for Void Linux setup
+install_void() {
+    echo "Installing for Void Linux..."
+    git clone https://github.com/rdWei/SocialMediaHackingToolkit
+    cd SocialMediaHackingToolkit
+    cd dependencies
+    sudo dpkg -i windscribe-cli
+    xbps-rindex -a windscribe-cli.xbps
+    windscribe login
+    cd ../cmd
+    pip3 install -r requirements.txt
+    cd ..
+    chmod +x linux.sh
+    ./linux.sh
+    echo "Void Linux installation complete!"
+}
+
+# Function for Kali Linux setup
+install_kali() {
+    echo "Installing for Kali Linux..."
+    git clone https://github.com/rdWei/SocialMediaHackingToolkit
+    cd SocialMediaHackingToolkit
+    cd dependencies
+    sudo dpkg -i windscribe-cli.deb
+    windscribe login
+    cd ../cmd
+    pip3 install -r requirements.txt
+    cd ..
+    chmod +x linux.sh
+    ./linux.sh
+    echo "Kali Linux installation complete!"
+}
+
+# Function for Termux setup
+install_termux() {
+    echo "Installing for Termux..."
+    git clone https://github.com/rdWei/SocialMediaHackingToolkit
+    cd SocialMediaHackingToolkit
+    cd cmd
+    pip3 install -r requirements.txt
+    cd ..
+    chmod +x linux.sh
+    ./linux.sh
+    echo "Termux installation complete!"
+}
+
+# Function for Windows setup
+install_windows() {
+    echo "Installing for Windows..."
+    echo "Download the repository ZIP file from GitHub."
+    echo "Extract the ZIP file and open a terminal in the 'SocialMediaHacking' folder."
+    echo "Then, run the following commands:"
+    echo "cd cmd"
+    echo "pip install -r requirements.txt"
+    echo "cd .."
+    echo "start windows.bat"
+    echo "Windows installation complete!"
+}
+
+# Execute the appropriate installation based on the OS choice
+case $os_choice in
+    1)
+        install_ubuntu_debian
+        ;;
+    2)
+        install_ubuntu_debian
+        ;;
+    3)
+        install_arch
+        ;;
+    4)
+        install_void
+        ;;
+    5)
+        install_kali
+        ;;
+    6)
+        install_termux
+        ;;
+    7)
+        install_windows
+        ;;
+    *)
+        echo "Invalid choice, please choose a number from 1 to 7."
+        ;;
+esac
