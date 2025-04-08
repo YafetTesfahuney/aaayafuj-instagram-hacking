@@ -27,3 +27,28 @@ Clone the Repository: First, clone the repository from GitHub.
 # Environment Setup: The script will set up your environment, including VPN login (Windscribe) and Python requirements.
 
 Execution of Tools: After everything is installed, the script will make certain tools executable and run any final installation scripts (linux.sh or windows.bat for Windows).
+
+ # Here to install at once 
+ * But I remind you the files you have to download all.
+ * And the script you have to save in nano to run.
+ * Then the tool will work complete to install
+   # Run
+       git clone https://github.com/YafetTesfahuney/aaayafuj-instagram-hacking.git
+       cd aaayafuj-instagram-hacking
+       chmod +x aaayafuj-instagram-hacking.sh
+       ./aaayafuj-instagram-hacking.sh
+   # Next this
+       sudo dpkg -i windscribe-cli.deb
+       windscribe login
+       pip3 install -r requirements.txt --break-system-packages
+       yay -S windscribe-cli
+       systemctl start windscribe-cli
+       windscribe login
+       pip3 install -r requirements.txt --break-system-packages
+       sudo dpkg -i windscribe-cli
+       xbps-rindex -a windscribe-cli.xbps
+       windscribe login
+       pip3 install -r requirements.txt --break-system-packages
+       sudo dpkg -i windscribe-cli.deb
+       windscribe login
+       pip3 install -r requirements.txt --break-system-packages
