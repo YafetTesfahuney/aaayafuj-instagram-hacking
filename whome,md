@@ -1,0 +1,7 @@
+# Windows specific instructions
+echo "Download the repository ZIP file from GitHub."
+echo "Extract the ZIP file and open a terminal in the 'SocialMediaHacking' folder."
+echo "Then, run the following commands:"
+echo "cd cmd"
+echo "pip install -r requirements.txt"
+echo "start windows.bat"
