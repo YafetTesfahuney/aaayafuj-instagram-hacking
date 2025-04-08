@@ -1,0 +1,11 @@
+# 💻 How to integrate with aaayafuj-instagram-hacking.sh
+Add these lines inside aaayafuj-instagram-hacking.sh:
+_______________________________________________________
+echo "[+] Installing Instagram automation modules..."
+pip3 install -r requirements.txt
+
+echo "[+] Running analytics & automation modules..."
+python3 get_insights.py
+python3 schedule_post.py
+python3 top_hashtags.py
+python3 audience_tracker.py &
