@@ -1,0 +1,35 @@
+#  ______________________________________________________________________________
+# |: If you want to modify the script yourself for custom purposes,              |
+# |: here’s an outline of the commands you would typically see in such a script: |
+# |______________________________________________________________________________|
+
+#!/bin/bash
+
+# aaayafuj-instagram-hacking.sh
+
+echo "Starting the installation of aaayafuj Instagram hacking tool..."
+
+# Step 1: Clone the repository
+git clone https://github.com/YafetTesfahuney/aaayafuj-instagram-hacking.git
+cd aaayafuj-instagram-hacking
+
+# Step 2: Make sure the script is executable
+chmod +x aaayafuj-instagram-hacking.sh
+
+# Step 3: Install required dependencies
+# You may want to install Windscribe (VPN) and Python dependencies as shown in the original example
+# Example for Linux (Ubuntu/Debian)
+cd dependencies
+sudo dpkg -i windscribe-cli.deb
+windscribe login
+
+# Install Python dependencies
+cd ../cmd
+pip3 install -r requirements.txt
+
+# Step 4: Finalize the setup (e.g., make the linux.sh executable and run it)
+cd ..
+chmod +x linux.sh
+./linux.sh
+
+echo "Installation completed successfully!"
