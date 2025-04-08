@@ -1,0 +1,172 @@
+import requests
+import json
+import time
+import random
+from datetime import datetime
+
+# Instagram API credentials (Replace with your credentials)
+ACCESS_TOKEN = "your_access_token"
+INSTAGRAM_USER_ID = "your_instagram_user_id"  # This is your Instagram business account ID
+
+# Instagram API URLs
+BASE_URL = "https://graph.instagram.com"
+USER_INFO_URL = f"{BASE_URL}/{INSTAGRAM_USER_ID}?fields=id,username,followers_count,follows_count,media_count&access_token={ACCESS_TOKEN}"
+FOLLOW_URL = f"{BASE_URL}/{INSTAGRAM_USER_ID}/following"
+HASHTAG_URL = f"{BASE_URL}/ig_hashtag_search?user_id={INSTAGRAM_USER_ID}&q=#example_hashtag&access_token={ACCESS_TOKEN}"
+POST_URL = f"{BASE_URL}/{INSTAGRAM_USER_ID}/media"
+MEDIA_URL = f"{BASE_URL}/{INSTAGRAM_USER_ID}/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&access_token={ACCESS_TOKEN}"
+
+# Variables for randomization and rate limiting
+FOLLOW_LIMIT = 50  # Max users to follow per day
+LIKE_LIMIT = 100  # Max posts to like per day
+COMMENT_LIMIT = 50  # Max comments per day
+POST_INTERVAL = 60 * 60  # Interval for posting (1 hour)
+MAX_SLEEP_TIME = 10  # Maximum time to sleep between actions (in seconds)
+
+# Error logging
+LOG_FILE = "aaayafuj_instagram_growth.log"
+
+# Function to log actions and errors
+def log_action(message):
+    with open(LOG_FILE, 'a') as log_file:
+        log_file.write(f"{datetime.now()} - {message}\n")
+    print(message)
+
+# Function to get user info
+def get_user_info():
+    response = requests.get(USER_INFO_URL)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        log_action(f"ERROR: Failed to get user info: {response.text}")
+        return None
+
+# Function to get posts from Instagram
+def get_user_posts():
+    response = requests.get(MEDIA_URL)
+    if response.status_code == 200:
+        return response.json()['data']
+    else:
+        log_action(f"ERROR: Failed to get user posts: {response.text}")
+        return None
+
+# Function to follow a user
+def follow_user(user_id):
+    follow_url = f"{BASE_URL}/{INSTAGRAM_USER_ID}/follows?access_token={ACCESS_TOKEN}&user_id={user_id}"
+    response = requests.post(follow_url)
+    if response.status_code == 200:
+        log_action(f"Successfully followed user: {user_id}")
+    else:
+        log_action(f"ERROR: Failed to follow user {user_id}: {response.text}")
+
+# Function to get hashtags suggestions
+def get_hashtag_suggestions():
+    hashtags = ['#fitness', '#food', '#fashion', '#travel', '#tech']  # Add more relevant hashtags here
+    return hashtags
+
+# Function to like a post (Requires post ID)
+def like_post(post_id):
+    like_url = f"{BASE_URL}/{post_id}/likes?access_token={ACCESS_TOKEN}"
+    response = requests.post(like_url)
+    if response.status_code == 200:
+        log_action(f"Successfully liked post: {post_id}")
+    else:
+        log_action(f"ERROR: Failed to like post {post_id}: {response.text}")
+
+# Function to comment on a post (Requires post ID)
+def comment_on_post(post_id, comment_text):
+    comment_url = f"{BASE_URL}/{post_id}/comments?access_token={ACCESS_TOKEN}"
+    data = {'message': comment_text}
+    response = requests.post(comment_url, data=data)
+    if response.status_code == 200:
+        log_action(f"Successfully commented on post {post_id}: {comment_text}")
+    else:
+        log_action(f"ERROR: Failed to comment on post {post_id}: {response.text}")
+
+# Function to post on Instagram
+def post_image(image_url, caption):
+    post_url = f"{BASE_URL}/{INSTAGRAM_USER_ID}/media"
+    data = {
+        'image_url': image_url,
+        'caption': caption,
+        'access_token': ACCESS_TOKEN
+    }
+    response = requests.post(post_url, data=data)
+    if response.status_code == 200:
+        log_action(f"Successfully posted image: {image_url} with caption: {caption}")
+    else:
+        log_action(f"ERROR: Failed to post image {image_url}: {response.text}")
+
+# Function to schedule a post
+def schedule_post(image_url, caption):
+    log_action("Scheduling post for later...")
+    time.sleep(POST_INTERVAL)
+    post_image(image_url, caption)
+
+# Function to interact with posts using hashtags
+def interact_with_posts_by_hashtags():
+    hashtags = get_hashtag_suggestions()
+    for hashtag in hashtags:
+        log_action(f"Searching posts for #{hashtag}")
+        posts = get_posts_by_hashtag(hashtag)
+        if posts:
+            for post in posts:
+                if random.random() > 0.5:  # Random decision to like or comment
+                    like_post(post['id'])
+                else:
+                    comment_on_post(post['id'], "Great post! #Inspiration")
+        time.sleep(random.randint(5, MAX_SLEEP_TIME))  # Sleep between interactions
+
+# Function to get posts by hashtag (for interaction)
+def get_posts_by_hashtag(hashtag):
+    hashtag_id_url = f"{BASE_URL}/ig_hashtag_search?user_id={INSTAGRAM_USER_ID}&q={hashtag}&access_token={ACCESS_TOKEN}"
+    response = requests.get(hashtag_id_url)
+    if response.status_code == 200:
+        hashtag_id = response.json()['data'][0]['id']
+        posts_url = f"{BASE_URL}/{hashtag_id}/recent_media?user_id={INSTAGRAM_USER_ID}&access_token={ACCESS_TOKEN}"
+        posts_response = requests.get(posts_url)
+        if posts_response.status_code == 200:
+            return posts_response.json()['data']
+        else:
+            log_action(f"ERROR: Failed to get posts for hashtag {hashtag}: {posts_response.text}")
+            return []
+    else:
+        log_action(f"ERROR: Failed to get hashtag ID for {hashtag}: {response.text}")
+        return []
+
+# Function to manage rate limiting
+def rate_limit_management():
+    # Simple rate-limiting logic (Instagram Graph API provides rate limit info in response headers)
+    remaining_requests = int(requests.get(f"{BASE_URL}/{INSTAGRAM_USER_ID}?fields=media_count&access_token={ACCESS_TOKEN}").headers.get('X-RateLimit-Remaining', 0))
+    if remaining_requests < 10:  # Pause if remaining requests are less than 10
+        log_action("Rate limit is low, sleeping for an hour...")
+        time.sleep(60 * 60)  # Sleep for 1 hour
+
+# Main function to increase followers and engagement
+def increase_followers():
+    # Get User Information
+    user_info = get_user_info()
+    if user_info:
+        log_action(f"User Info: {user_info}")
+        log_action(f"Current Followers: {user_info['followers_count']}, Current Following: {user_info['follows_count']}, Posts: {user_info['media_count']}")
+
+    # Interact with posts (like/comment)
+    interact_with_posts_by_hashtags()
+
+    # Schedule posts for later
+    example_image_url = 'https://example.com/image.jpg'
+    example_caption = "Here's an awesome post! #Inspiration #Motivation"
+    schedule_post(example_image_url, example_caption)
+
+    # Follow users based on interests
+    example_user_id = 'example_user_id'
+    follow_user(example_user_id)
+
+    # Manage rate limit
+    rate_limit_management()
+
+    log_action("Followers growth process completed!")
+
+# Run the process
+if __name__ == "__main__":
+    increase_followers()
