@@ -15,12 +15,7 @@ else
 fi
 
 
-
-
-
-
-
-#!/bin/bash
+# !/bin/bash
 
 # Ask for the IP Address to block or monitor
 read -p "Enter IP Address to block/monitor: " IP_ADDRESS
@@ -80,20 +75,10 @@ echo "$IP_ADDRESS blackhat.attacker" | sudo tee -a /etc/hosts
 echo "[+] Completed blocking and monitoring for IP: $IP_ADDRESS"
 
 
+__________________________________________________________________________________
 
 
-
-
-
-
-
-
-
-
-
-
-
-#!/bin/bash
+# !/bin/bash
 
 # Ask for the IP Address to block or monitor
 read -p "Enter IP Address to block/monitor: " IP_ADDRESS
@@ -139,40 +124,9 @@ echo "$IP_ADDRESS blackhat.attacker" | sudo tee -a /etc/hosts
 # Completed message
 echo "[+] Completed blocking and monitoring for IP: $IP_ADDRESS"
 
+____________________________________________________________________
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#!/bin/bash
+# !/bin/bash
 
 # Ask for the IP Address to block or monitor
 read -p "Enter IP Address to block/monitor: " IP_ADDRESS
@@ -217,35 +171,9 @@ echo "$IP_ADDRESS greyhat.attacker" | sudo tee -a /etc/hosts
 
 # Completed message
 echo "[+] Completed blocking and monitoring for IP: $IP_ADDRESS"
+___________________________________________________________________
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#!/bin/bash
+# !/bin/bash
 
 # Ask for the IP Address to target (illegal, malicious intent)
 read -p "Enter IP Address to target: " IP_ADDRESS
